@@ -1,5 +1,8 @@
 {
     "python.pythonPath": "azure/bin/python",
     "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "python.autoComplete.extraPaths": [
+        "/home/azureuser/pyutil",
+    ],
 }

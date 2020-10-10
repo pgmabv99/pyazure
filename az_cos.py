@@ -85,7 +85,8 @@ class az_cos:
     def create_items(self,cnt_obj,js):
         utz.enter2()
         for jsa in js:
-            cnt_obj.create_item(body=jsa)
+            resp=cnt_obj.create_item(body=jsa)
+            print("item created _rid =",resp["_rid"])
 
 
     def list_items(self,cnt_obj):
