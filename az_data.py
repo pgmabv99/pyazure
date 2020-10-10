@@ -1,6 +1,6 @@
 import datetime
-from pyutil.utz import utz
-from pyutil.utzexc import UtzExc
+from utz import utz
+from utzexc import UtzExc
 
 
 class az_data:

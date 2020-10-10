@@ -3,8 +3,8 @@
 from az_cos import az_cos
 from az_mss import az_mss
 from az_data import az_data
-from pyutil.utz import utz
-from pyutil.utzexc import UtzExc
+from utz import utz
+from utzexc import UtzExc
 import json
 
 

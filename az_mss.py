@@ -10,8 +10,8 @@ import pandas as pd
 import pyodbc
 
 from az_data import az_data
-from pyutil.utz import utz
-from pyutil.utzexc import UtzExc
+from utz import utz
+from utzexc import UtzExc
 
 
 class az_mss:
