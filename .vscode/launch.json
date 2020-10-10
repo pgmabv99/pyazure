@@ -10,9 +10,9 @@
             "request": "launch",
             "program": "/home/azureuser/pyazure/az_test.py",
             "console": "integratedTerminal",
-            // "env": {
-            //     "PYTHONPATH": "/home/azureuser/pyutil"
-            // },
+            "env": {
+                "PYTHONPATH": "/home/azureuser/pyutil"
+            },
         }
     ]
 }
