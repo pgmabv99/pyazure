@@ -56,11 +56,12 @@ class az_cos:
         except exceptions.CosmosResourceExistsError:
             print('A database with id  already exists:', self.dbid)
 
-    def re_create_container(self,cnid):
+    def re_create_container(self,td):
         utz.enter2()
         # //todo softcode id
         self.partition_key = PartitionKey(path='/id', kind='Hash')
-
+        #todo container name may not have . ??
+        cnid=td.table_name.replace(".","X")
         try:
             self.db_obj.delete_container(container=cnid)
             print('container  deleted: ', cnid)
@@ -95,8 +96,9 @@ class az_cos:
         for item in item_list:
             print(json.dumps(item, indent=True))
 
-    def query_items(self,cnid, cnt_obj):
+    def query_items(self,td, cnt_obj):
         utz.enter2("QUery============")
+        cnid=td.table_name.replace(".","X")
         try:
             # =============read from root 
             q = ""

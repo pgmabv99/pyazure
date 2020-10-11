@@ -1,5 +1,5 @@
 import datetime
-from utz import utz
+from utz import utz,ddict
 from utzexc import UtzExc
 
 
@@ -75,10 +75,25 @@ class az_data:
         order_list.append(self.get_sales_order_v2("SalesOrder2"))
         return order_list
 
-    def get_ppl_list(self):
+    def get_table_desc(self):
+        table_desc = {
+            "table_name": "sales.visits",
+            "table_engine": "mss",
+            "columns": [
+                 {"name": "id", "format": "int", "col_len": 0, "pkey": True, "identity":True}
+                ,{"name": "first_name", "format": "varchar", "col_len": 50  }
+                ,{"name": "visited_at", "format": "datetime", "col_len": 0 }
+                ,{"name": "height", "format": "float", "col_len": 0 }
+
+            ]
+
+        }
+        return ddict(table_desc)
+
+    def get_val_list(self):
         dt1 = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        ppl_list = []
-        ppl_list.append("  ( 'Lev', '" + dt1+"', 20.2)")
-        ppl_list.append(", ( 'Whsikey', '" + dt1+"', 10.1)")
-        ppl_list.append(", ( 'alexey', '" + dt1+"', 30.3)")
-        return ppl_list
+        val_list = []
+        val_list.append("  ( 'Lev', '" + dt1+"', 20.2)")
+        val_list.append(", ( 'Whsikey', '" + dt1+"', 10.1)")
+        val_list.append(", ( 'alexey', '" + dt1+"', 30.3)")
+        return val_list

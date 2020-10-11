@@ -10,7 +10,7 @@ import pandas as pd
 import pyodbc
 
 from az_data import az_data
-from utz import utz
+from utz import utz,ddict
 from utzexc import UtzExc
 
 
@@ -71,11 +71,11 @@ class az_mss:
     #         print(e)
     #         raise UtzExc(0, 0, "DBMS error")
 
-    def re_create_table(self):
+    def re_create_table(self, td):
         utz.enter2()
         try:
             q = ""
-            q = q+"DROP TABLE sales.visits"
+            q = q+"DROP TABLE " + td.table_name
             print("executing SQL \n", q)
             self.crs.execute(q)
             self.con.commit()
@@ -86,13 +86,26 @@ class az_mss:
 
         try:
             q = ""
-            q = q+"CREATE TABLE sales.visits ( "
-            q = q+"  id INT PRIMARY KEY IDENTITY (1, 1),"
-            q = q+"  first_name VARCHAR (50),"
-            q = q+"  visited_at DATETIME,"
-            q = q+"  height FLOAT "
-            # q=q+"  FOREIGN KEY (store_id) REFERENCES sales.stores (store_id)"
-            q = q+");"
+            q = q+"CREATE TABLE " + td.table_name+ "  ( "
+            icol=0
+            last_col=len(td.columns)-1
+            for col in td.columns:
+                ddcol=ddict(col)
+                q=q+" "+ddcol.name
+                q=q+" "+ddcol.format
+                col_len=ddcol.col_len
+                if col_len !=0 :
+                    q=q+"("+str(col_len)+")"
+                if ddcol.pkey==True:
+                    q=q+" PRIMARY KEY  "
+                if ddcol.identity==True:
+                    q=q+" IDENTITY (1, 1)"
+                if icol==last_col:
+                    q=q+")"
+                else:
+                    q=q+","
+                icol +=1
+
 
             print("executing SQL \n", q)
             self.crs.execute(q)
@@ -106,15 +119,31 @@ class az_mss:
     def list_containers(self):
         utz.enter2()
 
-    def insert_rows(self, table_name, ppl_list):
+    def insert_rows(self, td, val_list):
         utz.enter2()
         try:
             q = ""
-            q = q + " INSERT INTO " + table_name
-            q = q + " (first_name, visited_at, height)"
+            q = q + " INSERT INTO " + td.table_name + "("
+            icol=0
+            last_col=len(td.columns)-1
+            for col in td.columns:
+                # for dot notation
+                ddcol=ddict(col)
+                if ddcol.identity == True :
+                    # identity are inserted by system
+                    icol +=1
+                    continue
+                q=q+ddcol.name
+                if icol==last_col:
+                    q=q+")"
+                else:
+                    q=q+","
+                icol +=1
+     
             q = q + " VALUES"
-            for ppl in ppl_list:
+            for ppl in val_list:
                 q = q+ppl
+
             print("executing SQL \n", q)
             self.crs.execute(q)
             self.con.commit()
@@ -123,13 +152,13 @@ class az_mss:
             print(e)
             raise UtzExc(0, 0, "DBMS error")
 
-    def query_rows(self, table_name):
+    def query_rows(self, td):
         utz.enter2("QUery============")
         try:
 
             # =============read from root with multipath
             q = ""
-            q = q+"SELECT * FROM " + table_name
+            q = q+"SELECT * FROM " + td.table_name
             print("executing SQL \n", q)
             self.crs.execute(q)
             df = pd.DataFrame()
