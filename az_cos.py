@@ -26,7 +26,7 @@ class az_cos:
         self.dbid = "dbid1"
         logging.info("starting %s  %s ", self.dbid)
 
-    def db_init(self):
+    def db_con(self):
         utz.enter2()
         self.client = CosmosClient("https://pgmabv99.documents.azure.com:443/",
                                    {'masterKey': "qG1DL0mLFtFCfXl0N8jLK9TDYAHRJn4bok2ZqmJvP6RemJDn3oQ2lWostz2EgFJ0bEOVEY4wvXqOfF8k8hp09Q=="})

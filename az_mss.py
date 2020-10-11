@@ -24,7 +24,7 @@ class az_mss:
         # get data obj
         self.az_data1 = az_data()
 
-    def db_init(self):
+    def db_con(self):
         utz.enter2()
 
         server = 'tcp:pgmabv99.database.windows.net'

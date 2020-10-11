@@ -16,7 +16,7 @@ class az_test:
     def test_cos(self):
         try:
             cos_obj = az_cos()
-            cos_obj.db_init()
+            cos_obj.db_con()
             cos_obj.re_create_database()
             cos_obj.list_databases()
             
@@ -36,7 +36,7 @@ class az_test:
     def test_mss(self):
         try:
             mss_obj = az_mss()
-            mss_obj.db_init()
+            mss_obj.db_con()
 
             td=self.az_data1.get_ppl_table_desc()
             mss_obj.re_create_table(td)
@@ -56,7 +56,7 @@ class az_test:
     def test_mss_to_cos(self):
         try:
             mss_obj = az_mss()
-            mss_obj.db_init()
+            mss_obj.db_con()
 
             td=self.az_data1.get_ppl_table_desc()
             mss_obj.re_create_table(td)
@@ -69,7 +69,7 @@ class az_test:
             js = resp[1]
 
             cos_obj = az_cos()
-            cos_obj.db_init()
+            cos_obj.db_con()
             cos_obj.re_create_database()
             cnt_obj = cos_obj.re_create_container(td)
             # create items
