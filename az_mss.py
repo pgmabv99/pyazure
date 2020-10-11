@@ -50,26 +50,26 @@ class az_mss:
     def list_databases(self):
         utz.enter2()
 
-    # def re_create_schema(self):
-    #     utz.enter2()
-    #     try:
-    #         q=""
-    #         q=q+"DROP SCHEMA sales"
-    #         print("executing SQL \n", q)
-    #         self.crs.execute(q)
-    #     except pyodbc.ProgrammingError as e:
-    #         print("Error:================================= DROP schema failed ")
-    #         print(e)
+    def re_create_schema(self):
+        utz.enter2()
+        try:
+            q=""
+            q=q+"DROP SCHEMA sales"
+            print("executing SQL \n", q)
+            self.crs.execute(q)
+        except pyodbc.ProgrammingError as e:
+            print("Error:================================= DROP schema failed ")
+            print(e)
 
-    #     try:
-    #         q=""
-    #         q=q+"CREATE SCHEMA sales  "
-    #         print("executing SQL \n", q)
-    #         self.crs.execute(q)
-    #     except pyodbc.ProgrammingError as e:
-    #         print("Error:================================= CREATE schema failed ")
-    #         print(e)
-    #         raise UtzExc(0, 0, "DBMS error")
+        try:
+            q=""
+            q=q+"CREATE SCHEMA sales  "
+            print("executing SQL \n", q)
+            self.crs.execute(q)
+        except pyodbc.ProgrammingError as e:
+            print("Error:================================= CREATE schema failed ")
+            print(e)
+            raise UtzExc(0, 0, "DBMS error")
 
     def re_create_table(self, td):
         utz.enter2()
@@ -151,12 +151,13 @@ class az_mss:
             print("Error:================================= insert failed ")
             print(e)
             raise UtzExc(0, 0, "DBMS error")
-
+    
+    # read table based on td dict. result in into panda(pd) and json(js) -(duplicate)
     def query_rows(self, td):
         utz.enter2("QUery============")
         try:
 
-            # =============read from root with multipath
+            # =============
             q = ""
             q = q+"SELECT * FROM " + td.table_name
             print("executing SQL \n", q)

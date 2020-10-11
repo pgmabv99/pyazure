@@ -8,7 +8,7 @@ class az_data:
     def __init__(self):
         utz.enter2()
 
-    def get_sales_order(self, item_id):
+    def get_sales_order_val(self, item_id):
         utz.enter2(item_id)
         order1 = {'id': item_id,
                   'account_number': 'Account1',
@@ -40,7 +40,7 @@ class az_data:
 
         return order1
 
-    def get_sales_order_v2(self, item_id):
+    def get_sales_order_val_2(self, item_id):
         utz.enter2(item_id)
         # notice new fields have been added to the sales order
         order2 = {'id': item_id,
@@ -69,13 +69,13 @@ class az_data:
 
         return order2
 
-    def get_sales_order_list(self):
+    def get_sales_order_val_list(self):
         order_list = []
-        order_list.append(self.get_sales_order("SalesOrder1"))
-        order_list.append(self.get_sales_order_v2("SalesOrder2"))
+        order_list.append(self.get_sales_order_val("SalesOrder1"))
+        order_list.append(self.get_sales_order_val_val_2("SalesOrder2"))
         return order_list
 
-    def get_table_desc(self):
+    def get_ppl_table_desc(self):
         table_desc = {
             "table_name": "sales.visits",
             "table_engine": "mss",
@@ -90,7 +90,7 @@ class az_data:
         }
         return ddict(table_desc)
 
-    def get_val_list(self):
+    def get_ppl_val_list(self):
         dt1 = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         val_list = []
         val_list.append("  ( 'Lev', '" + dt1+"', 20.2)")

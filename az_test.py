@@ -25,7 +25,7 @@ class test:
             cnt_obj = cos_obj.re_create_container("cnid1")
             cos_obj.list_containers()
 
-            js = self.az_data1.get_sales_order_list()
+            js = self.az_data1.get_sales_order_val_list()
             cos_obj.create_items(cnt_obj, js)
 
             cos_obj.query_items("cnid1", cnt_obj)
@@ -38,10 +38,10 @@ class test:
             mss_obj = az_mss()
             mss_obj.db_init()
 
-            td=self.az_data1.get_table_desc()
+            td=self.az_data1.get_ppl_table_desc()
             mss_obj.re_create_table(td)
 
-            val_list = self.az_data1.get_val_list()
+            val_list = self.az_data1.get_ppl_val_list()
             mss_obj.insert_rows(td, val_list)
             resp = mss_obj.query_rows(td)
             df = resp[0]
@@ -58,10 +58,10 @@ class test:
             mss_obj = az_mss()
             mss_obj.db_init()
 
-            td=self.az_data1.get_table_desc()
+            td=self.az_data1.get_ppl_table_desc()
             mss_obj.re_create_table(td)
 
-            val_list = self.az_data1.get_val_list()
+            val_list = self.az_data1.get_ppl_val_list()
             mss_obj.insert_rows(td, val_list)
 
             # get rows in js
