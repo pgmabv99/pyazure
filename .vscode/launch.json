@@ -8,7 +8,7 @@
             "name": "Python: Main file",
             "type": "python",
             "request": "launch",
-            "program": "/home/azureuser/pyazure/az_test.py",
+            "program": "/home/azureuser/pyazure/az_main.py",
             "console": "integratedTerminal",
             "env": {
                 "PYTHONPATH": "/home/azureuser/pyutil"

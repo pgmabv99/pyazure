@@ -8,7 +8,7 @@ from utzexc import UtzExc
 import json
 
 
-class test:
+class az_test:
     def __init__(self):
         # get data obj
         self.az_data1 = az_data()
@@ -80,9 +80,5 @@ class test:
             print("............aborting")
 
 
-test1 = test()
-# test1.test_cos()
-# test1.test_mss()
-test1.test_mss_to_cos()
 
 
