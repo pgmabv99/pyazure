@@ -164,39 +164,36 @@ class az_mss:
             self.crs.execute(q)
             df = pd.DataFrame()
 
-            sql_col_names = []
-            sql_col_formats = []
+            #build column desciptor
+            js_col_list=[]
             for row in self.crs.description:
-                sql_col_name = row[0]
-                sql_col_names.append(sql_col_name)
-                sql_col_format = row[1]
-                sql_col_formats.append(sql_col_format)
 
-            # build df
-            for icol in range(len(sql_col_names)):
-                # add header(olummn name) to pandas
-                sql_col_name = sql_col_names[icol]
-                df[sql_col_name] = ""
-
-                # add datatype
-                sql_col_form = sql_col_formats[icol]
-                print(sql_col_form)
-                if sql_col_form == int:
+                col=ddict({})
+                col.name=row[0]
+                sql_format=row[1]
+                if sql_format == int:
                     df_col_form = "int64"
-                elif sql_col_form == float:
+                elif sql_format == float:
                     # todo why float doea not work, converted to in in df
                     # df_col_form="float"
                     df_col_form = "object"
-                elif sql_col_form == str:
+                elif sql_format == str:
                     df_col_form = "string"
-                elif sql_col_form == datetime:
+                elif sql_format == datetime:
                     df_col_form = "datetime64"
                 else:
                     df_col_form = "object"
+                # todo use dataframe as generic format for now
+                col.df_col_format=df_col_form
+                js_col_list.append(col)
 
+            # build df
+            for col  in js_col_list:
+                # add header(olummn name) to pandas
+                df[col.name] = ""
                 # build dict with single entry
                 df_col_formats = {}
-                df_col_formats[sql_col_name] = df_col_form
+                df_col_formats[col.name] =  col.df_col_format
                 # apply to df
                 df = df.astype(df_col_formats)
 
@@ -204,15 +201,17 @@ class az_mss:
             df = df.convert_dtypes()
             print("df before load\n", df.dtypes)
 
-            js = []
+            js_row_list = []
             row = self.crs.fetchone()
             irow = 0
             while row:
                 icol = 0
-                jsa = {}
+                js_row = {}
                 for col_val in row:
+
                     # add cell to df
-                    df.at[irow, sql_col_names[icol]] = col_val
+                    df.at[irow, js_col_list[icol].name] = col_val
+
                     # add attribute to json
                     col_val1 = col_val
                     # todo convert datatime autoatically
@@ -221,10 +220,11 @@ class az_mss:
                     # todo hack to convert id to str for cosmos
                     if icol == 0:
                         col_val1 = str(col_val)
-                    jsa[sql_col_names[icol]] = col_val1
+                    js_row[js_col_list[icol].name] = col_val1
+
                     icol += 1
                 # append to json array
-                js.append(jsa)
+                js_row_list.append(js_row)
                 # next row
                 row = self.crs.fetchone()
                 irow += 1
@@ -234,4 +234,4 @@ class az_mss:
             print(e)
             raise UtzExc(0, 0, "DBMS error")
 
-        return df, js
+        return df, js_row_list, js_col_list
