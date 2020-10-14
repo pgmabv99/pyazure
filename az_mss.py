@@ -4,7 +4,7 @@ import logging
 import os
 import json
 from datetime import datetime, date
-import pandas as pd
+# import pandas as pd
 
 
 import pyodbc
@@ -162,7 +162,7 @@ class az_mss:
             q = q+"SELECT * FROM " + td.table_name
             print("executing SQL \n", q)
             self.crs.execute(q)
-            df = pd.DataFrame()
+         
 
             #build column desciptor
             js_col_list=[]
@@ -187,19 +187,22 @@ class az_mss:
                 col.df_col_format=df_col_form
                 js_col_list.append(col)
 
-            # build df
-            for col  in js_col_list:
-                # add header(olummn name) to pandas
-                df[col.name] = ""
-                # build dict with single entry
-                df_col_formats = {}
-                df_col_formats[col.name] =  col.df_col_format
-                # apply to df
-                df = df.astype(df_col_formats)
+            # # build df
+            # df = pd.DataFrame()
+            # todo pando too slow to build in docker
+            df={}
+            # for col  in js_col_list:
+            #     # add header(olummn name) to pandas
+            #     df[col.name] = ""
+            #     # build dict with single entry
+            #     df_col_formats = {}
+            #     df_col_formats[col.name] =  col.df_col_format
+            #     # apply to df
+            #     df = df.astype(df_col_formats)
 
-            # this prevents conversion of int to float OMG
-            df = df.convert_dtypes()
-            print("df before load\n", df.dtypes)
+            # # this prevents conversion of int to float OMG
+            # df = df.convert_dtypes()
+            # print("df before load\n", df.dtypes)
 
             js_row_list = []
             row = self.crs.fetchone()
@@ -209,8 +212,8 @@ class az_mss:
                 js_row = {}
                 for col_val in row:
 
-                    # add cell to df
-                    df.at[irow, js_col_list[icol].name] = col_val
+                    # # add cell to df
+                    # df.at[irow, js_col_list[icol].name] = col_val
 
                     # add attribute to json
                     col_val1 = col_val
