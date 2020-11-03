@@ -28,8 +28,9 @@ class az_cos:
 
     def db_con(self):
         utz.enter2()
-        self.client = CosmosClient("https://pgmabv99.documents.azure.com:443/",
-                                   {'masterKey': "qG1DL0mLFtFCfXl0N8jLK9TDYAHRJn4bok2ZqmJvP6RemJDn3oQ2lWostz2EgFJ0bEOVEY4wvXqOfF8k8hp09Q=="})
+        self.client = CosmosClient("https://pgmabv99new.documents.azure.com:443/",
+                                   {'masterKey': "I0q0SKkWublqRTgDdlfuAOvzxwiv6Jx6twFXwp24Aa93rXhBvRnAdb5BqKfI6ph33TiLh9usoKskbZbWlddViA=="})
+                                #    {'masterKey': "qG1DL0mLFtFCfXl0N8jLK9TDYAHRJn4bok2ZqmJvP6RemJDn3oQ2lWostz2EgFJ0bEOVEY4wvXqOfF8k8hp09Q=="})
         logging.info("connection established")  
         print(self.client)
 

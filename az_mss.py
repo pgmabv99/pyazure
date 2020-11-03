@@ -27,10 +27,12 @@ class az_mss:
     def db_con(self):
         utz.enter2()
 
-        server = 'tcp:pgmabv99.database.windows.net'
+        server = 'tcp:pgmabv99new.database.windows.net'
+        # server = 'tcp:pgmabv99.database.windows.net'
         database = 'db99'
         username = 'srvadmin'
-        password = 'Mark8484'
+        # password = 'Mark8484'
+        password = 'Lena8484'
         con_str = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + \
             server+';DATABASE='+database+';UID='+username+';PWD=' + password
         print("connecting to ", con_str)

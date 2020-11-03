@@ -72,7 +72,7 @@ class az_data:
     def get_sales_order_val_list(self):
         order_list = []
         order_list.append(self.get_sales_order_val("SalesOrder1"))
-        order_list.append(self.get_sales_order_val_val_2("SalesOrder2"))
+        # order_list.append(self.get_sales_order_val_val_2("SalesOrder2"))
         return order_list
 
     def get_ppl_table_desc(self):

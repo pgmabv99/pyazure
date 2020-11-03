@@ -19,16 +19,17 @@ class az_test:
             cos_obj.db_con()
             cos_obj.re_create_database()
             cos_obj.list_databases()
-            
+            td=self.az_data1.get_ppl_table_desc()
 
             # create container get handle
-            cnt_obj = cos_obj.re_create_container("cnid1")
+            cnt_obj = cos_obj.re_create_container(td)
+            # cnt_obj = cos_obj.re_create_container("cnid1")
             cos_obj.list_containers()
 
             js = self.az_data1.get_sales_order_val_list()
             cos_obj.create_items(cnt_obj, js)
 
-            cos_obj.query_items("cnid1", cnt_obj)
+            cos_obj.query_items(td, cnt_obj)
             cos_obj.list_items(cnt_obj)
         except UtzExc:
             print("............aborting")
@@ -39,6 +40,8 @@ class az_test:
             mss_obj.db_con()
 
             td=self.az_data1.get_ppl_table_desc()
+            #todo to be run once 
+            # mss_obj.re_create_schema()
             mss_obj.re_create_table(td)
 
             val_list = self.az_data1.get_ppl_val_list()
@@ -46,7 +49,7 @@ class az_test:
             resp = mss_obj.query_rows(td)
             df = resp[0]
             js = resp[1]
-            print("df after\n", df.dtypes)
+            # print("df after\n", df.dtypes)
             print("df after\n", df)
             utz.jprint(js)
 

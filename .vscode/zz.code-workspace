@@ -13,5 +13,7 @@
 			"path": "../../pydjango"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"python.pythonPath": "/home/azureuser/pyazure/my_app_venv/bin/python"
+	}
 }
