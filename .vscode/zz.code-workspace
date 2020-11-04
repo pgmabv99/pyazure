@@ -14,6 +14,7 @@
 		}
 	],
 	"settings": {
-		"python.pythonPath": "/home/azureuser/pyazure/my_app_venv/bin/python"
+		"python.pythonPath": "my_app_venv/bin/python"
+		// "python.pythonPath": "/home/azureuser/pyazure/my_app_venv/bin/python"
 	}
 }
