@@ -12,7 +12,6 @@
             "console": "integratedTerminal",
             "env": {
                 "PYTHONPATH": "${workspaceFolder:pyutil}"
-                // "PYTHONPATH": "${workspaceFolder}/../pyutil"
             },
         }
     ]
