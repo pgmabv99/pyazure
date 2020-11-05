@@ -1,10 +1,1 @@
-azure
-my_app_venv
 __pycache__
-__pycache__/*
-__pycache__/az_cos.cpython-38.pyc
-__pycache__/az_cos.cpython-38.pyc
-__pycache__/az_data.cpython-38.pyc
-__pycache__/az_cos.cpython-38.pyc
-__pycache__/az_data.cpython-38.pyc
-__pycache__/az_mss.cpython-38.pyc
