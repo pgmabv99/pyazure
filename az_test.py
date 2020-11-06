@@ -62,6 +62,8 @@ class az_test:
             mss_obj.db_con()
 
             td=self.az_data1.get_ppl_table_desc()
+            #todo to be run once 
+            # mss_obj.re_create_schema()
             mss_obj.re_create_table(td)
 
             val_list = self.az_data1.get_ppl_val_list()
