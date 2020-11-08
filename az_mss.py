@@ -30,14 +30,14 @@ class az_mss:
         server = 'tcp:pgmabv88.database.windows.net'
         database = 'db88'
         username = 'srvadmin'
-        password = 'Lena8484'
+        password = 'Mark8484'
         con_str = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + \
             server+';DATABASE='+database+';UID='+username+';PWD=' + password
         print("connecting to ", con_str)
 
         try:
             self.con = pyodbc.connect(con_str)
-        except pyodbc.InterfaceError as e:
+        except (pyodbc.InterfaceError, pyodbc.ProgrammingError) as e:
             print("Error:================================= connect fail")
             print(e)
             raise UtzExc(0, 0, "DBMS error")
