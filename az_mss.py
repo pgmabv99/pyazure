@@ -69,7 +69,7 @@ class az_mss:
         except pyodbc.ProgrammingError as e:
             print("Error:================================= CREATE schema failed ")
             print(e)
-            raise UtzExc(0, 0, "DBMS error")
+            # raise UtzExc(0, 0, "DBMS error")
 
     def re_create_table(self, td):
         utz.enter2()

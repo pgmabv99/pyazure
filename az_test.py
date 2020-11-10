@@ -23,7 +23,6 @@ class az_test:
 
             # create container get handle
             cnt_obj = cos_obj.re_create_container(td)
-            # cnt_obj = cos_obj.re_create_container("cnid1")
             cos_obj.list_containers()
 
             js = self.az_data1.get_sales_order_val_list()
@@ -41,7 +40,7 @@ class az_test:
 
             td=self.az_data1.get_ppl_table_desc()
             #todo to be run once 
-            # mss_obj.re_create_schema()
+            mss_obj.re_create_schema()
             mss_obj.re_create_table(td)
 
             val_list = self.az_data1.get_ppl_val_list()
@@ -63,7 +62,7 @@ class az_test:
 
             td=self.az_data1.get_ppl_table_desc()
             #todo to be run once 
-            # mss_obj.re_create_schema()
+            mss_obj.re_create_schema()
             mss_obj.re_create_table(td)
 
             val_list = self.az_data1.get_ppl_val_list()
