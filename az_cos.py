@@ -68,6 +68,7 @@ class az_cos:
         except exceptions.CosmosResourceNotFoundError:
             print('A container  with id  not found:', cnid)
 
+        cnt_obj=None
         try:
             cnt_obj = self.db_obj.create_container(
                 id=cnid, partition_key=self.partition_key)
