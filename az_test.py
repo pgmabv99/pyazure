@@ -59,12 +59,9 @@ class az_test:
         try:
             mss_obj = az_mss()
             mss_obj.db_con()
-
             td=self.az_data1.get_ppl_table_desc()
-            #todo to be run once 
             mss_obj.re_create_schema()
             mss_obj.re_create_table(td)
-
             val_list = self.az_data1.get_ppl_val_list()
             mss_obj.insert_rows(td, val_list)
 
@@ -84,11 +81,14 @@ class az_test:
             print("............aborting")
 
     def mss_to_html(self):
-        az_data1 = az_data()
         mss_obj = az_mss()
         mss_obj.db_con()
-
         td=self.az_data1.get_ppl_table_desc()
+        mss_obj.re_create_schema()
+        mss_obj.re_create_table(td)
+        val_list = self.az_data1.get_ppl_val_list()
+        mss_obj.insert_rows(td, val_list)
+
         resp = mss_obj.query_rows(td)
         js_row_list = resp[1]
         js_col_list = resp[2]
