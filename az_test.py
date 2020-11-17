@@ -79,15 +79,15 @@ class az_test:
 
         except UtzExc:
             print("............aborting")
-
+    #assume MSS objects are created separatly
     def mss_to_html(self):
         mss_obj = az_mss()
         mss_obj.db_con()
         td=self.az_data1.get_ppl_table_desc()
-        mss_obj.re_create_schema()
-        mss_obj.re_create_table(td)
-        val_list = self.az_data1.get_ppl_val_list()
-        mss_obj.insert_rows(td, val_list)
+        # mss_obj.re_create_schema()
+        # mss_obj.re_create_table(td)
+        # val_list = self.az_data1.get_ppl_val_list()
+        # mss_obj.insert_rows(td, val_list)
 
         resp = mss_obj.query_rows(td)
         js_row_list = resp[1]
