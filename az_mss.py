@@ -33,19 +33,19 @@ class az_mss:
         password = 'Mark8484'
         con_str = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + \
             server+';DATABASE='+database+';UID='+username+';PWD=' + password
-        print("connecting to ", con_str)
+        utz.print("connecting to ......... ", con_str)
 
         try:
             self.con = pyodbc.connect(con_str)
         except (pyodbc.InterfaceError, pyodbc.ProgrammingError) as e:
-            print("Error:================================= connect fail")
-            print(e)
+            utz.print("Error:================================= connect fail")
+            utz.print(e)
             raise UtzExc(0, 0, "DBMS error")
 
-        print(self.con)
+        utz.print(self.con)
 
         self.crs = self.con.cursor()
-        print(self.crs)
+        utz.print(self.crs)
 
     def list_databases(self):
         utz.enter2()
@@ -55,20 +55,20 @@ class az_mss:
         try:
             q=""
             q=q+"DROP SCHEMA sales"
-            print("executing SQL \n", q)
+            utz.print("executing SQL \n", q)
             self.crs.execute(q)
         except pyodbc.ProgrammingError as e:
-            print("Error:================================= DROP schema failed ")
-            print(e)
+            utz.print("Error:================================= DROP schema failed ")
+            utz.print(e)
 
         try:
             q=""
             q=q+"CREATE SCHEMA sales  "
-            print("executing SQL \n", q)
+            utz.print("executing SQL \n", q)
             self.crs.execute(q)
         except pyodbc.ProgrammingError as e:
-            print("Error:================================= CREATE schema failed ")
-            print(e)
+            utz.print("Error:================================= CREATE schema failed ")
+            utz.print(e)
             # raise UtzExc(0, 0, "DBMS error")
 
     def re_create_table(self, td):
@@ -76,12 +76,12 @@ class az_mss:
         try:
             q = ""
             q = q+"DROP TABLE " + td.table_name
-            print("executing SQL \n", q)
+            utz.print("executing SQL \n", q)
             self.crs.execute(q)
             self.con.commit()
         except pyodbc.ProgrammingError as e:
-            print("Error:================================= DROP failed ")
-            print(e)
+            utz.print("Error:================================= DROP failed ")
+            utz.print(e)
             # raise UtzExc(0, 0, "DBMS error")
 
         try:
@@ -107,13 +107,13 @@ class az_mss:
                 icol +=1
 
 
-            print("executing SQL \n", q)
+            utz.print("executing SQL \n", q)
             self.crs.execute(q)
             self.con.commit()
 
         except pyodbc.ProgrammingError as e:
-            print("Error:================================= CREATE failed ")
-            print(e)
+            utz.print("Error:================================= CREATE failed ")
+            utz.print(e)
             raise UtzExc(0, 0, "DBMS error")
 
     def list_containers(self):
@@ -144,12 +144,12 @@ class az_mss:
             for ppl in val_list:
                 q = q+ppl
 
-            print("executing SQL \n", q)
+            utz.print("executing SQL \n", q)
             self.crs.execute(q)
             self.con.commit()
         except pyodbc.InterfaceError as e:
-            print("Error:================================= insert failed ")
-            print(e)
+            utz.print("Error:================================= insert failed ")
+            utz.print(e)
             raise UtzExc(0, 0, "DBMS error")
     
     # read table based on td dict. result in into panda(pd) and json(js) -(duplicate)
@@ -160,7 +160,7 @@ class az_mss:
             # =============
             q = ""
             q = q+"SELECT * FROM " + td.table_name
-            print("executing SQL \n", q)
+            utz.print("executing SQL \n", q)
             self.crs.execute(q)
          
 
@@ -202,7 +202,7 @@ class az_mss:
 
             # # this prevents conversion of int to float OMG
             # df = df.convert_dtypes()
-            # print("df before load\n", df.dtypes)
+            # utz.print("df before load\n", df.dtypes)
 
             js_row_list = []
             row = self.crs.fetchone()
@@ -233,8 +233,8 @@ class az_mss:
                 irow += 1
             # end loop
         except pyodbc.InterfaceError as e:
-            print("Error:================================= select/fetch failed ")
-            print(e)
+            utz.print("Error:================================= select/fetch failed ")
+            utz.print(e)
             raise UtzExc(0, 0, "DBMS error")
 
         return df, js_row_list, js_col_list
